@@ -4,6 +4,10 @@ const matchwinner = document.querySelector('#matchwinner');
 const scores = document.querySelector('#scores');
 const winnerm = document.querySelector('#winner-message');
 
+let rounds = 0;
+let player_score = 0;
+let comp_score = 0;
+
 btns.forEach((button) => button.addEventListener('click', playRound));
 
 function computerChoice() {
@@ -61,27 +65,3 @@ function updateWinner() {
     winnerm.textContent = `Winner: ${winner}`;
     winnerm.style.visibility = 'visible';
 }
-
-function game() {
-    do {
-        let comp = computerChoice();
-        let player = userChoice();
-        let winner = getWinner(comp, player);
-        if (winner === 1){
-            console.log('computer won match');
-            comp_score++;
-        } else if (winner === 2) {
-            console.log('player won match');
-            player_score++;
-        } else console.log('match was a tie');
-        console.log(`Comp score: ${comp_score}, player score: ${player_score}`);
-        rounds++;
-    } while (rounds < 5)
-    if (player_score > comp_score) console.log('Player wins!');
-    else if (player_score < comp_score) console.log('Computer wins!');
-    else console.log('The game was a tie!');
-}
-
-let rounds = 0;
-let player_score = 0;
-let comp_score = 0;
