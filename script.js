@@ -2,7 +2,7 @@ const options = ['rock', 'paper', 'scissors'];
 const btns = document.querySelectorAll('button');
 const matchwinner = document.querySelector('#matchwinner');
 const scores = document.querySelector('#scores');
-console.log(matchwinner);
+const winnerm = document.querySelector('#winner-message');
 
 btns.forEach((button) => button.addEventListener('click', playRound));
 
@@ -21,8 +21,8 @@ function getWinner(p1, p2) {
 
 function playRound() {
     if (rounds >= 5) return;
-    let comp= computerChoice();
-    let player= this.id;
+    let comp = computerChoice();
+    let player = this.id;
     let winner = getWinner(comp, player);
     if (winner === 1){
         console.log('computer won match');
@@ -33,6 +33,9 @@ function playRound() {
     } else console.log('match was a tie');
     updateMatchResult(winner);
     updateScores();
+    if (rounds == 4) {
+        updateWinner();
+    }
     console.log(`Comp score: ${comp_score}, player score: ${player_score}`);
     rounds++;
 }
@@ -48,6 +51,15 @@ function updateMatchResult(result) {
 
 function updateScores() {
     scores.textContent = `Player score: ${player_score}, Computer score: ${comp_score}`;
+}
+
+function updateWinner() {
+    let winner;
+    if (player_score > comp_score) winner = 'player';
+    else if (player_score < comp_score) winner = 'computer';
+    else winner = 'tie';
+    winnerm.textContent = `Winner: ${winner}`;
+    winnerm.style.visibility = 'visible';
 }
 
 function game() {
